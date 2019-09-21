@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "value": "Salami",
+      "code": "SLI"
+    },
+    {
+      "id": 2,
+      "value": "Onion",
+      "code": "ONN"
+    },
+    {
+        "id": 3,
+        "value": "Ketchup",
+        "code": "KTC"
+    }
+  ]

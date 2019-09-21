@@ -1,0 +1,60 @@
+<html>
+<script type="text/javascript">
+    let value = "";
+    function fillTextArea(value) {
+        document.getElementById("textarea").value = value;
+    }
+    function getAll() {
+        fetch('http://localhost:3000/all', {
+            method: 'GET'
+        }).then((res) => {
+            return res.json();
+        }).then((array) => {
+            const text = array.map((item) => item.value)
+            fillTextArea(text)
+        })
+    }
+    function getOne() {
+        const id = +document.getElementById("numb").value;
+        if (typeof(id) === "number" && id !== 0) {
+            fetch(`http://localhost:3000/one/${id}`, {
+                method: 'GET'
+            }).then((res) => {
+                return res.json();
+            }).then((one) => {
+                if (typeof one === "object") {
+                    fillTextArea(one.value);
+                } else {
+                    fillTextArea(one);
+                }
+            })
+        } else {
+            alert("must be number");
+        }
+    }
+    function getCountOfIngrd() {
+        fetch(`http://localhost:3000/count`, {
+                method: 'GET'
+            }).then((res) => {
+                return res.json();
+            }).then((count) => {
+                fillTextArea(count);
+            })
+    }
+</script>
+
+<body>
+    <div>
+        <input type="text" id="numb">
+        <button onclick="getOne()">Get one</button>
+    </div>
+    <div>
+        <button onclick="getAll()">Get all</button>
+    </div>
+    <div>
+        <button onclick="getCountOfIngrd()">Get count of ingridients</button>
+    </div>
+    <textarea name="textarea" id="textarea" cols="30" rows="10"></textarea>
+</body>
+
+</html>
